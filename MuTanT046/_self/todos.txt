@@ -1,2 +1,0 @@
-1. Update Email Text & Logo Image 
-2. Remove Experienve Level & Employment Type From Alerts Tables & their logic.
