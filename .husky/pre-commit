@@ -1,0 +1,30 @@
+#!/bin/sh
+# .husky/pre-commit
+
+# Exit immediately if any command fails
+set -e
+
+echo "Running pre-commit checks..."
+
+echo "1. Checking code formatting with Prettier..."
+pnpm run check:write || {
+  echo >&2 "ERROR: Code formatting issues detected."
+  echo >&2 "→ Run 'pnpm run check:write', stage your changes, and try committing again."
+  exit 1
+}
+
+echo "2. Running ESLint..."
+pnpm run check || {
+  echo >&2 "ERROR: Linting errors found."
+  echo >&2 "→ Run 'pnpm run check', review the changes, stage them, and try again."
+  exit 1
+}
+
+echo "3. Type checking with TypeScript..."
+pnpm run typecheck || {
+  echo >&2 "ERROR: TypeScript type checking failed."
+  echo >&2 "→ Fix the above errors before committing."
+  exit 1
+}
+
+echo "✅ All checks passed. Proceeding with commit."

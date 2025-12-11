@@ -1,0 +1,15 @@
+---
+alwaysApply: true
+---
+
+# Agent Behavior (Hard Rules)
+
+- **No file edits** until the user replies **`APPROVE`** (or
+  **`HOTFIX APPROVED`** for emergencies).
+- **Show code in chat only** prior to approval; do not create/modify files.
+- **Ask clarifying questions** and request design/inspiration assets before
+  coding UI.
+- **No new libraries/patterns** unless explicitly asked by the user.
+- **Confidence Gate:** If **Confidence < 9.5/10**, keep discussing—do not
+  proceed.
+- **Footer Requirement:** End every message with `Confidence: X.X/10`.

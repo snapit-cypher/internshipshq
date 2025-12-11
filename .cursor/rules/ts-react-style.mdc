@@ -1,0 +1,69 @@
+---
+alwaysApply: false
+---
+# TypeScript & React (Hard Rules)
+
+## Exports & Declarations
+
+- Use **const exports** for all exports.
+- **Single default export only** where Next.js requires it (e.g.,
+  `app/**/page.tsx`); otherwise prefer **named exports**.
+- Use **arrow functions** for components, hooks, and utilities.
+
+## Props & Types
+
+- Type component props with an inline `type Props = { ... }` near the component.
+- Only promote to shared types if used in **2+ places**.
+- **No `any`**. Use `unknown` at boundaries and narrow.
+- `children` typed as `React.ReactNode`.
+
+## Components & Naming
+
+- Component names: **PascalCase**; file names: **kebab-case** (e.g.,
+  `fancy-card.tsx`).
+- Hooks: `useSomething` prefix, one clear responsibility per hook.
+
+## Logic & Readability
+
+- Use **short-circuit** (`&&`, `||`) when only one branch is needed.
+- Use **ternary** only when both branches are necessary—avoid nested ternaries.
+- Prefer **early returns** over deep nesting.
+
+## Async & Errors
+
+- Use `async/await`; avoid `.then()` chains in components.
+- Pick one error strategy per boundary:
+  - **Default:** Throw errors and catch at UI/server boundaries.
+- In UI, handle empty/error states explicitly (no silent catches).
+
+## State & Effects
+
+- Prefer local state; avoid unnecessary global state.
+- `useEffect` for non-render side effects only; avoid fetching in client
+  components unless explicitly needed.
+- Maintain hooks order; no early returns before hooks.
+
+## Immutability & Params
+
+- Treat arrays/objects as immutable; use spread/copy helpers.
+- Avoid boolean flags in function params; prefer options objects or separate
+  functions.
+
+## Performance
+
+- Use `React.memo`, `useCallback`, `useMemo` **only** for measured or clear
+  wins.
+- List rendering: provide **stable keys** (avoid index when items can reorder).
+
+## Imports & Paths
+
+- Use path aliases from `tsconfig.json`. No page-level aliases except home page
+  as configured.
+- Group/sort imports: third-party → aliases → relative, separated by blank
+  lines.
+
+## Strictness
+
+- Enforce TS strictness: `strict: true`, `noImplicitAny: true`.
+- Recommended: `noUncheckedIndexedAccess: true`,
+  `exactOptionalPropertyTypes: true` (adopt if present in repo).

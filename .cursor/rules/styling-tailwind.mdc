@@ -1,0 +1,15 @@
+---
+description: Styling rules (Tailwind + class management).
+globs:
+  - 'src/**/*.tsx'
+  - 'src/**/*.ts'
+---
+
+# Styling & Class Management (Hard Rules)
+
+- For **long Tailwind class lists**, break across multiple lines and use the
+  project’s `cn` helper.
+- For **conditional classes**, always use `cn` for clarity and consistency.
+- Keep styles **consistent with existing tokens and patterns**; do not introduce
+  new utility conventions without request.
+- No extra/unnecessary spaces or line breaks—keep code neat and concise.

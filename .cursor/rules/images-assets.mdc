@@ -1,0 +1,18 @@
+---
+description: Images and assets sourcing/compression rules.
+globs:
+  - 'src/**/*.ts'
+  - 'src/**/*.tsx'
+  - 'public/**'
+---
+
+# Images & Assets (Hard Rules)
+
+- **Figma extraction:** Use the **original file**; select the image in the right
+  panel and download from the provided source.
+- **Compression:** Compress all images with Squoosh before adding to the repo.
+- For help with compression, reach out to **Malay Khan** (team-specific).
+- Asset placement:
+  - **Common images** → `public/common/`
+  - **Page-specific images** → `public/<page>/`
+- Keep filenames lowercase with hyphens (e.g., `hero-illustration.png`).

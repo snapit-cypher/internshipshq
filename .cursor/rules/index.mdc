@@ -1,0 +1,50 @@
+---
+description: Global, always-on rules for this repo.
+alwaysApply: true
+---
+
+# Global Meta Rules (ALWAYS)
+
+- **Scope:** Apply these rules only to **.ts / .tsx** work. Do not write PR text
+  or commit changes automatically.
+- **Consistency First:** Read the current codebase and **adhere to established
+  patterns, naming, and architecture**. Favor consistency over introducing new
+  logic or abstractions.
+- **No New Libraries/Patterns:** Do **not** suggest new dependencies or patterns
+  unless explicitly requested.
+- **Human-in-the-loop:** PR descriptions and merges are human-only tasks.
+- **Minimal diffs:** When providing code, prefer **small, focused diffs** with
+  exact file paths.
+
+## Execution Protocol (No coding until approved)
+
+1. **Understand & Clarify (no file writes)**
+   - Provide: **Problem Restatement** (3–5 lines), **Assumptions** (numbered),
+     **Open Questions** (≤7, grouped: Requirements/Constraints/UX/Data/Risks).
+   - Ask for **inspiration/design files** (Figma/screenshots/links) when UI is
+     involved.
+   - Provide **Confidence: X.X/10** at the message footer (required in every
+     message). If **< 9.5**, do **not** proceed.
+
+2. **Plan (still no file writes)**
+   - Provide **Goals/Non-goals**, **High-level Approach** (5–10 bullets),
+     **Interfaces/Contracts** (brief TS shapes), **Dependencies**.
+   - Propose **Actionable Task List** (2–8 items with clear DOD), **Top 3
+     Risks + mitigations**, **Lite Test Plan**.
+
+3. **Approval Gate**
+   - Wait for explicit **`APPROVE`** before creating/modifying files.
+   - Approval granularity can be **task-by-task** or **whole-plan** (agent
+     proposes; user decides).
+   - **Hotfix:** If the user writes **`HOTFIX APPROVED`**, proceed immediately
+     (still summarize plan + risks briefly).
+
+4. **Implementation (post-approval)**
+   - Execute **only the approved scope**. If new uncertainty appears, **pause**,
+     ask, update plan, and resume only when **Confidence ≥ 9.5**.
+
+5. **Handover**
+   - Summarize **what changed**, **how to verify**, and **follow-ups**. Do
+     **not** write PR text.
+
+> Footer rule: Every message must end with `Confidence: X.X/10`.

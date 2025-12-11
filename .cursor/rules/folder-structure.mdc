@@ -1,0 +1,28 @@
+---
+description: Folder placement and organization guardrails.
+globs:
+  - 'src/**/*.ts'
+  - 'src/**/*.tsx'
+---
+
+# Folder Structure (Hard Rules)
+
+- Follow the existing Next.js **app router** conventions.
+- **URLs** in `app/` are lowercase with hyphens.
+- Place files consistently:
+  - `components/ui/` — shadcn/ui and base UI elements.
+  - `components/providers/` — all providers (context/state).
+  - `components/icons/` — icons by file; export via `components/icons/index.ts`.
+  - `components/wrappers/` — global/page wrappers (e.g., Navbar/Title wrappers).
+  - `components/views/<page>/` — page-specific components; break large ones into
+    smaller parts in the same folder.
+  - `components/common/` — reusable components shared across pages.
+  - `components/cards/` — reusable card components.
+- Outside `components/`:
+  - `config/site.ts` — navbar/footer/meta data.
+  - `hooks/` — custom hooks.
+  - `styles/` — CSS.
+  - `lib/` — utils, `cn`, fonts, clients (Stripe, Supabase).
+- `tsconfig.json`:
+  - Define path aliases; **do not** create aliases for individual pages (except
+    Home if already configured).

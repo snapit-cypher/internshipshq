@@ -1,0 +1,15 @@
+echo "0. Checking commit message format…"
+
+MSG_FILE="$1"
+MSG_LINE="$(head -n1 "$MSG_FILE")"
+
+# allow nested parentheses one level deep in the scope
+PATTERN='^(feat|fix|docs|style|test|chore)\([a-z0-9-]+(?:\([a-z0-9-]+\))*\): .+$'
+
+if ! echo "$MSG_LINE" | grep -Pq "$PATTERN"; then
+  echo >&2 "ERROR: Invalid commit message format."
+  echo >&2 "Expected: <type>(<scope>): <subject>"
+  echo >&2 "  • type ∈ {feat,fix,docs,style,test,chore}"
+  echo >&2 "  • scope may be like ui or ui(buttons)"
+  exit 1
+fi

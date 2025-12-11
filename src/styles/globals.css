@@ -1,0 +1,279 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@plugin "@tailwindcss/typography";
+
+*,
+*:after,
+*:before {
+	box-sizing: border-box;
+}
+
+html {
+	scroll-behavior: smooth;
+	scroll-padding-top: 100px;
+}
+
+body {
+	overflow-x: hidden;
+}
+
+:root {
+	--radius: 12px;
+	--background: rgba(251, 248, 238, 1);
+	--foreground: oklch(0.2257 0.0194 280.25);
+	--card: rgba(251, 248, 238, 1);
+	--card-foreground: oklch(0.2257 0.0194 280.25);
+	--popover: rgba(251, 248, 238, 1);
+	--popover-foreground: oklch(0.145 0 0);
+	--primary: oklch(0.6969 0.1478 161.63);
+	--primary-foreground: oklch(1 0 0);
+	--secondary: oklch(0.9821 0 0);
+	--secondary-foreground: oklch(0.2257 0.0194 280.25);
+	--muted: oklch(0.9256 0.0159 98.99);
+	--muted-foreground: oklch(0.2257 0.0194 280.25);
+	--accent: oklch(0.9584 0.0471 87.03);
+	--accent-foreground: oklch(0.2257 0.0194 280.25);
+	--destructive: oklch(0.577 0.245 27.325);
+	--destructive-foreground: oklch(1 0 0);
+	--border: rgba(242, 242, 244, 1);
+	--input: oklch(1 0 0);
+	--ring: oklch(0.145 0 0);
+}
+
+/* Custom scrollbar styling */
+::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+
+::-webkit-scrollbar-track {
+	background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+	background: var(--primary);
+	border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: var(--primary);
+	opacity: 0.8;
+}
+
+/* Firefox scrollbar */
+* {
+	scrollbar-width: thin;
+	scrollbar-color: var(--primary) var(--background);
+}
+
+@layer utilities {
+	.text-heading-h1 {
+		font-weight: 700;
+		font-size: clamp(2rem, 4vw, 3.875rem);
+		line-height: clamp(2.5rem, 4.5vw, 4.0625rem);
+		letter-spacing: -1.5%;
+	}
+
+	.text-heading-h2 {
+		font-weight: 700;
+		font-size: clamp(1.5rem, 3vw, 2.5rem);
+		line-height: clamp(1.8rem, 3.5vw, 3rem);
+		letter-spacing: -1.5%;
+	}
+
+	.text-heading-h3 {
+		font-weight: 600;
+		font-size: clamp(1.2rem, 2vw, 1.5rem);
+		line-height: clamp(1.5rem, 2.5vw, 2rem);
+		letter-spacing: -1.5%;
+	}
+
+	.text-heading-h4 {
+		font-weight: 600;
+		font-size: clamp(1.125rem, 1.5vw, 1.25rem);
+		line-height: clamp(1.25rem, 2vw, 1.5rem);
+		letter-spacing: -1.5%;
+	}
+
+	.text-heading-h5 {
+		font-weight: 600;
+		font-size: clamp(1rem, 1.5vw, 1.125rem);
+		line-height: clamp(1.25rem, 2vw, 1.5rem);
+		letter-spacing: -1.5%;
+	}
+
+	.text-paragraph-section {
+		font-weight: 400;
+		font-size: clamp(1rem, 1vw, 1.125rem);
+		line-height: clamp(1.25rem, 1.5vw, 1.5rem);
+	}
+
+	.text-paragraph {
+		font-weight: 400;
+		font-size: clamp(0.875rem, 0.5vw, 1rem);
+		line-height: clamp(1.25rem, 1.5vw, 1.5rem);
+	}
+
+	.font-cal-sans {
+		font-family: var(--font-cal-sans);
+	}
+
+	.font-jet-brains-mono {
+		font-family: var(--font-jet-brains-mono);
+	}
+}
+
+@theme inline {
+	--radius-sm: calc(var(--radius) - 8px);
+	--radius-md: calc(var(--radius) - 4px);
+	--radius-lg: var(--radius);
+	--radius-xl: calc(var(--radius) + 4px);
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+	--color-card: var(--card);
+	--color-card-foreground: var(--card-foreground);
+	--color-popover: var(--popover);
+	--color-popover-foreground: var(--popover-foreground);
+	--color-primary: var(--primary);
+	--color-primary-foreground: var(--primary-foreground);
+	--color-secondary: var(--secondary);
+	--color-secondary-foreground: var(--secondary-foreground);
+	--color-muted: var(--muted);
+	--color-muted-foreground: var(--muted-foreground);
+	--color-accent: var(--accent);
+	--color-accent-foreground: var(--accent-foreground);
+	--color-destructive: var(--destructive);
+	--color-destructive-foreground: var(--destructive-foreground);
+	--color-para: var(--para);
+	--color-border: var(--border);
+	--color-input: var(--input);
+	--color-ring: var(--ring);
+	--color-chart-1: var(--chart-1);
+	--color-chart-2: var(--chart-2);
+	--color-chart-3: var(--chart-3);
+	--color-chart-4: var(--chart-4);
+	--color-chart-5: var(--chart-5);
+	--color-sidebar: var(--sidebar);
+	--color-sidebar-foreground: var(--sidebar-foreground);
+	--color-sidebar-primary: var(--sidebar-primary);
+	--color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+	--color-sidebar-accent: var(--sidebar-accent);
+	--color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+	--color-sidebar-border: var(--sidebar-border);
+	--color-sidebar-ring: var(--sidebar-ring);
+	--padding-content-sm: clamp(1.2rem, 2vw, 4rem);
+	--padding-content: clamp(1.5rem, 3vw, 4rem);
+	--padding-content-lg: clamp(4rem, 6vw, 9rem);
+	--margin-content-sm: clamp(2rem, 5vw, 8rem);
+	--margin-content: clamp(2.5rem, 6vw, 8rem);
+	--margin-content-lg: clamp(4rem, 7vw, 9rem);
+	--margin-content-xl: clamp(5rem, 8vw, 10rem);
+	--max-width-container: 1440px;
+	--max-width-sub-container: 1200px;
+	--max-width-para-xs: 20rem;
+	--max-width-para-sm: 35rem;
+	--max-width-para: 40rem;
+	--max-width-para-lg: 50rem;
+	--max-width-para-xl: 60rem;
+}
+
+@layer base {
+	* {
+		@apply border-border outline-ring/50;
+	}
+	body {
+		@apply bg-background text-foreground overflow-x-hidden;
+		font-family: var(--font-inter);
+	}
+	.card-shadow {
+		@apply shadow-[0_8px_16px_-12px_rgba(0,0,0,0.15),0_1px_2px_0_rgba(0,0,0,0.05)];
+	}
+	button {
+		@apply cursor-pointer;
+	}
+
+	/* ===================================== */
+	/*             BLOG SECTION              */
+	/* ===================================== */
+
+	.post-content img {
+		@apply my-6 h-auto max-w-full rounded-md;
+	}
+
+	.post-content figure figcaption {
+		@apply text-center text-sm text-gray-800;
+	}
+
+	.post-content h1 {
+		@apply my-2 text-3xl font-bold md:text-4xl;
+	}
+
+	.post-content h2,
+	.post-content h3 {
+		@apply my-2 text-xl font-bold md:text-2xl;
+	}
+
+	.post-content a {
+		@apply text-primary underline;
+	}
+
+	.post-content iframe {
+		@apply my-6;
+	}
+
+	.post-content p {
+		@apply my-6 text-lg md:leading-normal;
+	}
+
+	.post-content ul,
+	.post-content ol {
+		@apply my-6 list-inside list-disc;
+	}
+
+	.post-content li {
+		@apply mb-2;
+	}
+
+	.post-content blockquote {
+		padding-left: 2rem;
+		border-left: 4px solid var(--primary);
+		@apply my-12 text-lg md:leading-normal;
+	}
+
+	/* ===================================== */
+	/*             BUTTONS SECTION           */
+	/* ===================================== */
+
+	.primary-button {
+		background: linear-gradient(180deg, #0070ff 0%, #0058ff 100%);
+		/* For browsers supporting display-p3, you can use @media queries or a more advanced approach, 
+           but plain CSS alone doesn't allow two backgrounds in this way. 
+           Therefore, only the sRGB fallback is defined directly. */
+		box-shadow: 0px 0px 0px 1px rgba(13, 97, 255, 1) inset, 0px 1px 2px 0px
+			rgba(41, 41, 41, 0.24);
+	}
+
+	.secondary-button {
+		background: linear-gradient(
+			180deg,
+			#ffffff 0%,
+			rgba(193, 200, 210, 0.09) 100%
+		);
+		/* P3 color fallback is omitted; see comment above */
+		box-shadow: 0px 0px 0px 1px rgba(18, 55, 105, 0.08) inset, 0px 1px 2px 0px
+			rgba(164, 172, 185, 0.24);
+	}
+}
+
+.border-lines {
+	border-left: 2px solid rgba(242, 242, 244, 1);
+	border-right: 2px solid rgba(242, 242, 244, 1);
+	background-color: rgba(251, 248, 238, 1);
+	background-image: repeating-linear-gradient(
+		-45deg,
+		rgba(242, 242, 244, 1) 0,
+		rgba(242, 242, 244, 1) 1px,
+		transparent 1px,
+		transparent 10px /* ⬅ reduced from 20px to 10px */
+	);
+}
