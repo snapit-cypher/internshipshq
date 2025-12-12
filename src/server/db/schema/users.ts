@@ -52,7 +52,7 @@ export const accounts = createTable(
 	}),
 	(t) => [
 		primaryKey({ columns: [t.provider, t.providerAccountId] }),
-		index("account_user_id_idx").on(t.userId),
+		index("internshipshq_account_user_id_idx").on(t.userId),
 	],
 );
 
@@ -75,7 +75,7 @@ export const sessions = createTable(
 			.timestamp("expires", { mode: "date", withTimezone: true })
 			.notNull(),
 	}),
-	(t) => [index("t_user_id_idx").on(t.userId)],
+	(t) => [index("internshipshq_session_user_id_idx").on(t.userId)],
 );
 
 export const sessionsRelations = relations(sessions, ({ one }) => ({

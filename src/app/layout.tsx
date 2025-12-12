@@ -4,7 +4,6 @@ import type { Metadata } from "next";
 import NextTopLoader from "nextjs-toploader";
 
 import { MessageHandler } from "@/components/common/message-handler";
-import { PosthogProviderHandler } from "@/components/providers/analytics/provider";
 import { SystemProvider } from "@/components/providers/system-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { TailwindIndicator } from "@/components/ui/tailwind-indicator";
@@ -93,49 +92,48 @@ export default async function RootLayout({
 	const session = await auth();
 	return (
 		<SessionProvider session={session}>
-			<PosthogProviderHandler>
-				<html
-					lang="en"
-					suppressHydrationWarning
-					className={cn(
-						fontInter.variable,
-						fontCalSans.variable,
-						fontJetBrainsMono.variable,
-					)}
-				>
-					<head>
-						<script
-							type="application/ld+json"
-							// biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
-							dangerouslySetInnerHTML={{ __html: faqStructuredDataJson }}
-						/>
-					</head>
-					<body className="relative">
-						<NextTopLoader
-							showSpinner={false}
-							height={3}
-							initialPosition={0.08}
-							color="#954AFC"
-							crawl
-							crawlSpeed={200}
-							easing="ease"
-							speed={200}
-							zIndex={999999}
-						/>
-						<TRPCReactProvider>
-							<SystemProvider>
-								<TooltipProvider>
-									{children}
-									{modal}
-								</TooltipProvider>
-							</SystemProvider>
-						</TRPCReactProvider>
-						<Suspense fallback={null}>
-							<MessageHandler />
-						</Suspense>
-						<Toaster position="bottom-right" richColors expand />
-						<TailwindIndicator />
-						{/* <Script
+			<html
+				lang="en"
+				suppressHydrationWarning
+				className={cn(
+					fontInter.variable,
+					fontCalSans.variable,
+					fontJetBrainsMono.variable,
+				)}
+			>
+				<head>
+					<script
+						type="application/ld+json"
+						// biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
+						dangerouslySetInnerHTML={{ __html: faqStructuredDataJson }}
+					/>
+				</head>
+				<body className="relative">
+					<NextTopLoader
+						showSpinner={false}
+						height={3}
+						initialPosition={0.08}
+						color="#954AFC"
+						crawl
+						crawlSpeed={200}
+						easing="ease"
+						speed={200}
+						zIndex={999999}
+					/>
+					<TRPCReactProvider>
+						<SystemProvider>
+							<TooltipProvider>
+								{children}
+								{modal}
+							</TooltipProvider>
+						</SystemProvider>
+					</TRPCReactProvider>
+					<Suspense fallback={null}>
+						<MessageHandler />
+					</Suspense>
+					<Toaster position="bottom-right" richColors expand />
+					<TailwindIndicator />
+					{/* <Script
 							defer
 							strategy="afterInteractive"
 							type="text/javascript"
@@ -143,9 +141,8 @@ export default async function RootLayout({
 							id="pianjs"
 							data-code="H85LgXeGS9p0RyCtqtQvWk1nPUAtuHbO"
 						/> */}
-					</body>
-				</html>
-			</PosthogProviderHandler>
+				</body>
+			</html>
 		</SessionProvider>
 	);
 }

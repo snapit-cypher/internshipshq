@@ -123,31 +123,37 @@ export const jobs = createTable(
 		googleIndexingError: d.text("google_indexing_error"),
 	}),
 	(t) => [
-		index("jobs_date_posted_idx").on(t.datePosted),
-		index("jobs_is_expired_idx").on(t.isExpired),
-		index("jobs_remote_derived_idx").on(t.remoteDerived),
-		index("jobs_ai_experience_level_idx").on(t.aiExperienceLevel),
-		index("jobs_title_idx").on(t.title),
-		index("jobs_organization_idx").on(t.organization),
+		index("internshipshq_jobs_date_posted_idx").on(t.datePosted),
+		index("internshipshq_jobs_is_expired_idx").on(t.isExpired),
+		index("internshipshq_jobs_remote_derived_idx").on(t.remoteDerived),
+		index("internshipshq_jobs_ai_experience_level_idx").on(t.aiExperienceLevel),
+		index("internshipshq_jobs_title_idx").on(t.title),
+		index("internshipshq_jobs_organization_idx").on(t.organization),
 		// Google indexing indexes
-		index("jobs_google_indexed_idx").on(t.googleIndexed),
-		index("jobs_google_indexed_at_idx").on(t.googleIndexedAt),
-		index("jobs_is_expired_google_indexed_idx").on(
+		index("internshipshq_jobs_google_indexed_idx").on(t.googleIndexed),
+		index("internshipshq_jobs_google_indexed_at_idx").on(t.googleIndexedAt),
+		index("internshipshq_jobs_is_expired_google_indexed_idx").on(
 			t.isExpired,
 			t.googleIndexed,
 		),
 		// GIN indexes for JSONB array columns
-		index("jobs_cities_derived_gin_idx").using("gin", sql`${t.citiesDerived}`),
-		index("jobs_regions_derived_gin_idx").using(
+		index("internshipshq_jobs_cities_derived_gin_idx").using(
+			"gin",
+			sql`${t.citiesDerived}`,
+		),
+		index("internshipshq_jobs_regions_derived_gin_idx").using(
 			"gin",
 			sql`${t.regionsDerived}`,
 		),
-		index("jobs_countries_derived_gin_idx").using(
+		index("internshipshq_jobs_countries_derived_gin_idx").using(
 			"gin",
 			sql`${t.countriesDerived}`,
 		),
-		index("jobs_ai_taxonomies_a_gin_idx").using("gin", sql`${t.aiTaxonomiesA}`),
-		index("jobs_employment_type_gin_idx").using(
+		index("internshipshq_jobs_ai_taxonomies_a_gin_idx").using(
+			"gin",
+			sql`${t.aiTaxonomiesA}`,
+		),
+		index("internshipshq_jobs_employment_type_gin_idx").using(
 			"gin",
 			sql`${t.employmentType}`,
 		),
@@ -198,9 +204,9 @@ export const apiUsageLogs = createTable(
 			.notNull(),
 	}),
 	(t) => [
-		index("api_usage_logs_timestamp_idx").on(t.timestamp),
-		index("api_usage_logs_status_idx").on(t.status),
-		index("api_usage_logs_billing_period_reset_at_idx").on(
+		index("internshipshq_api_usage_logs_timestamp_idx").on(t.timestamp),
+		index("internshipshq_api_usage_logs_status_idx").on(t.status),
+		index("internshipshq_api_usage_logs_billing_period_reset_at_idx").on(
 			t.billingPeriodResetAt,
 		),
 	],
@@ -237,9 +243,13 @@ export const emailSubscribers = createTable(
 			.notNull(),
 	}),
 	(t) => [
-		index("email_subscribers_email_idx").on(t.email),
-		index("email_subscribers_is_subscribed_idx").on(t.isSubscribed),
-		index("email_subscribers_unsubscribe_token_idx").on(t.unsubscribeToken),
+		index("internshipshq_email_subscribers_email_idx").on(t.email),
+		index("internshipshq_email_subscribers_is_subscribed_idx").on(
+			t.isSubscribed,
+		),
+		index("internshipshq_email_subscribers_unsubscribe_token_idx").on(
+			t.unsubscribeToken,
+		),
 	],
 );
 
@@ -271,8 +281,8 @@ export const alertPreferences = createTable(
 			.notNull(),
 	}),
 	(t) => [
-		index("alert_preferences_user_id_idx").on(t.userId),
-		index("alert_preferences_is_active_idx").on(t.isActive),
+		index("internshipshq_alert_preferences_user_id_idx").on(t.userId),
+		index("internshipshq_alert_preferences_is_active_idx").on(t.isActive),
 	],
 );
 
