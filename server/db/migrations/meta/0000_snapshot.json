@@ -1,0 +1,1445 @@
+{
+  "id": "19c67d5e-e347-4219-826a-744fc251d3e1",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.internshipshq_account": {
+      "name": "internshipshq_account",
+      "schema": "",
+      "columns": {
+        "user_id": {
+          "name": "user_id",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "type": {
+          "name": "type",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "provider": {
+          "name": "provider",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "provider_account_id": {
+          "name": "provider_account_id",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "refresh_token": {
+          "name": "refresh_token",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "access_token": {
+          "name": "access_token",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "expires_at": {
+          "name": "expires_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "token_type": {
+          "name": "token_type",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "scope": {
+          "name": "scope",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "id_token": {
+          "name": "id_token",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "session_state": {
+          "name": "session_state",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "internshipshq_account_user_id_idx": {
+          "name": "internshipshq_account_user_id_idx",
+          "columns": [
+            {
+              "expression": "user_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "internshipshq_account_user_id_internshipshq_user_id_fk": {
+          "name": "internshipshq_account_user_id_internshipshq_user_id_fk",
+          "tableFrom": "internshipshq_account",
+          "tableTo": "internshipshq_user",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "internshipshq_account_provider_provider_account_id_pk": {
+          "name": "internshipshq_account_provider_provider_account_id_pk",
+          "columns": [
+            "provider",
+            "provider_account_id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.internshipshq_alert_preferences": {
+      "name": "internshipshq_alert_preferences",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "keywords": {
+          "name": "keywords",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "locations": {
+          "name": "locations",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "remote_only": {
+          "name": "remote_only",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "is_active": {
+          "name": "is_active",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": true
+        },
+        "last_alert_sent_at": {
+          "name": "last_alert_sent_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "alerts_sent_count": {
+          "name": "alerts_sent_count",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      },
+      "indexes": {
+        "internshipshq_alert_preferences_user_id_idx": {
+          "name": "internshipshq_alert_preferences_user_id_idx",
+          "columns": [
+            {
+              "expression": "user_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "internshipshq_alert_preferences_is_active_idx": {
+          "name": "internshipshq_alert_preferences_is_active_idx",
+          "columns": [
+            {
+              "expression": "is_active",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "internshipshq_alert_preferences_user_id_internshipshq_user_id_fk": {
+          "name": "internshipshq_alert_preferences_user_id_internshipshq_user_id_fk",
+          "tableFrom": "internshipshq_alert_preferences",
+          "tableTo": "internshipshq_user",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.internshipshq_api_config": {
+      "name": "internshipshq_api_config",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "jobs_limit": {
+          "name": "jobs_limit",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "jobs_remaining": {
+          "name": "jobs_remaining",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "requests_limit": {
+          "name": "requests_limit",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "requests_remaining": {
+          "name": "requests_remaining",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "billing_period_reset_at": {
+          "name": "billing_period_reset_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.internshipshq_api_usage_logs": {
+      "name": "internshipshq_api_usage_logs",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "timestamp": {
+          "name": "timestamp",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "endpoint": {
+          "name": "endpoint",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "jobs_fetched": {
+          "name": "jobs_fetched",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "request_count": {
+          "name": "request_count",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 1
+        },
+        "response_time_ms": {
+          "name": "response_time_ms",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "status": {
+          "name": "status",
+          "type": "varchar(20)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "error_message": {
+          "name": "error_message",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "billing_period_reset_at": {
+          "name": "billing_period_reset_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "jobs_limit": {
+          "name": "jobs_limit",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "jobs_remaining": {
+          "name": "jobs_remaining",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "requests_limit": {
+          "name": "requests_limit",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "requests_remaining": {
+          "name": "requests_remaining",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      },
+      "indexes": {
+        "internshipshq_api_usage_logs_timestamp_idx": {
+          "name": "internshipshq_api_usage_logs_timestamp_idx",
+          "columns": [
+            {
+              "expression": "timestamp",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "internshipshq_api_usage_logs_status_idx": {
+          "name": "internshipshq_api_usage_logs_status_idx",
+          "columns": [
+            {
+              "expression": "status",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "internshipshq_api_usage_logs_billing_period_reset_at_idx": {
+          "name": "internshipshq_api_usage_logs_billing_period_reset_at_idx",
+          "columns": [
+            {
+              "expression": "billing_period_reset_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.internshipshq_email_subscribers": {
+      "name": "internshipshq_email_subscribers",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "categories": {
+          "name": "categories",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "is_subscribed": {
+          "name": "is_subscribed",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": true
+        },
+        "subscribed_at": {
+          "name": "subscribed_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "unsubscribed_at": {
+          "name": "unsubscribed_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "unsubscribe_token": {
+          "name": "unsubscribe_token",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "last_email_sent_at": {
+          "name": "last_email_sent_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "emails_sent_count": {
+          "name": "emails_sent_count",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      },
+      "indexes": {
+        "internshipshq_email_subscribers_email_idx": {
+          "name": "internshipshq_email_subscribers_email_idx",
+          "columns": [
+            {
+              "expression": "email",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "internshipshq_email_subscribers_is_subscribed_idx": {
+          "name": "internshipshq_email_subscribers_is_subscribed_idx",
+          "columns": [
+            {
+              "expression": "is_subscribed",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "internshipshq_email_subscribers_unsubscribe_token_idx": {
+          "name": "internshipshq_email_subscribers_unsubscribe_token_idx",
+          "columns": [
+            {
+              "expression": "unsubscribe_token",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "internshipshq_email_subscribers_email_unique": {
+          "name": "internshipshq_email_subscribers_email_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "email"
+          ]
+        },
+        "internshipshq_email_subscribers_unsubscribe_token_unique": {
+          "name": "internshipshq_email_subscribers_unsubscribe_token_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "unsubscribe_token"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.internshipshq_jobs": {
+      "name": "internshipshq_jobs",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "date_posted": {
+          "name": "date_posted",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "date_created": {
+          "name": "date_created",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "title": {
+          "name": "title",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "organization": {
+          "name": "organization",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "organization_url": {
+          "name": "organization_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "date_validthrough": {
+          "name": "date_validthrough",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "url": {
+          "name": "url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "source_type": {
+          "name": "source_type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "source": {
+          "name": "source",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "source_domain": {
+          "name": "source_domain",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "organization_logo": {
+          "name": "organization_logo",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "domain_derived": {
+          "name": "domain_derived",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "locations_raw": {
+          "name": "locations_raw",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "locations_alt_raw": {
+          "name": "locations_alt_raw",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "location_type": {
+          "name": "location_type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "location_requirements_raw": {
+          "name": "location_requirements_raw",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "cities_derived": {
+          "name": "cities_derived",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "counties_derived": {
+          "name": "counties_derived",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "regions_derived": {
+          "name": "regions_derived",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "countries_derived": {
+          "name": "countries_derived",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "locations_derived": {
+          "name": "locations_derived",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "timezones_derived": {
+          "name": "timezones_derived",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "lats_derived": {
+          "name": "lats_derived",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "lngs_derived": {
+          "name": "lngs_derived",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "remote_derived": {
+          "name": "remote_derived",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "description_html": {
+          "name": "description_html",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "description_text": {
+          "name": "description_text",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "employment_type": {
+          "name": "employment_type",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "salary_raw": {
+          "name": "salary_raw",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ai_salary_currency": {
+          "name": "ai_salary_currency",
+          "type": "varchar(10)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ai_salary_value": {
+          "name": "ai_salary_value",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ai_salary_minvalue": {
+          "name": "ai_salary_minvalue",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ai_salary_maxvalue": {
+          "name": "ai_salary_maxvalue",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ai_salary_unittext": {
+          "name": "ai_salary_unittext",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ai_benefits": {
+          "name": "ai_benefits",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ai_experience_level": {
+          "name": "ai_experience_level",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ai_work_arrangement": {
+          "name": "ai_work_arrangement",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ai_work_arrangement_office_days": {
+          "name": "ai_work_arrangement_office_days",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ai_remote_location": {
+          "name": "ai_remote_location",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ai_remote_location_derived": {
+          "name": "ai_remote_location_derived",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ai_key_skills": {
+          "name": "ai_key_skills",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ai_hiring_manager_name": {
+          "name": "ai_hiring_manager_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ai_hiring_manager_email_address": {
+          "name": "ai_hiring_manager_email_address",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ai_core_responsibilities": {
+          "name": "ai_core_responsibilities",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ai_requirements_summary": {
+          "name": "ai_requirements_summary",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ai_working_hours": {
+          "name": "ai_working_hours",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ai_employment_type": {
+          "name": "ai_employment_type",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ai_job_language": {
+          "name": "ai_job_language",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ai_visa_sponsorship": {
+          "name": "ai_visa_sponsorship",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "ai_keywords": {
+          "name": "ai_keywords",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ai_taxonomies_a": {
+          "name": "ai_taxonomies_a",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ai_education_requirements": {
+          "name": "ai_education_requirements",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "linkedin_org_employees": {
+          "name": "linkedin_org_employees",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "linkedin_org_url": {
+          "name": "linkedin_org_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "linkedin_org_size": {
+          "name": "linkedin_org_size",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "linkedin_org_slogan": {
+          "name": "linkedin_org_slogan",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "linkedin_org_industry": {
+          "name": "linkedin_org_industry",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "linkedin_org_followers": {
+          "name": "linkedin_org_followers",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "linkedin_org_headquarters": {
+          "name": "linkedin_org_headquarters",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "linkedin_org_type": {
+          "name": "linkedin_org_type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "linkedin_org_foundeddate": {
+          "name": "linkedin_org_foundeddate",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "linkedin_org_specialties": {
+          "name": "linkedin_org_specialties",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "linkedin_org_locations": {
+          "name": "linkedin_org_locations",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "linkedin_org_description": {
+          "name": "linkedin_org_description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "linkedin_org_slug": {
+          "name": "linkedin_org_slug",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "is_expired": {
+          "name": "is_expired",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "google_indexed": {
+          "name": "google_indexed",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "google_indexed_at": {
+          "name": "google_indexed_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "google_indexing_status": {
+          "name": "google_indexing_status",
+          "type": "varchar(20)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "google_indexing_error": {
+          "name": "google_indexing_error",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "internshipshq_jobs_date_posted_idx": {
+          "name": "internshipshq_jobs_date_posted_idx",
+          "columns": [
+            {
+              "expression": "date_posted",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "internshipshq_jobs_is_expired_idx": {
+          "name": "internshipshq_jobs_is_expired_idx",
+          "columns": [
+            {
+              "expression": "is_expired",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "internshipshq_jobs_remote_derived_idx": {
+          "name": "internshipshq_jobs_remote_derived_idx",
+          "columns": [
+            {
+              "expression": "remote_derived",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "internshipshq_jobs_ai_experience_level_idx": {
+          "name": "internshipshq_jobs_ai_experience_level_idx",
+          "columns": [
+            {
+              "expression": "ai_experience_level",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "internshipshq_jobs_title_idx": {
+          "name": "internshipshq_jobs_title_idx",
+          "columns": [
+            {
+              "expression": "title",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "internshipshq_jobs_organization_idx": {
+          "name": "internshipshq_jobs_organization_idx",
+          "columns": [
+            {
+              "expression": "organization",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "internshipshq_jobs_google_indexed_idx": {
+          "name": "internshipshq_jobs_google_indexed_idx",
+          "columns": [
+            {
+              "expression": "google_indexed",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "internshipshq_jobs_google_indexed_at_idx": {
+          "name": "internshipshq_jobs_google_indexed_at_idx",
+          "columns": [
+            {
+              "expression": "google_indexed_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "internshipshq_jobs_is_expired_google_indexed_idx": {
+          "name": "internshipshq_jobs_is_expired_google_indexed_idx",
+          "columns": [
+            {
+              "expression": "is_expired",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "google_indexed",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "internshipshq_jobs_cities_derived_gin_idx": {
+          "name": "internshipshq_jobs_cities_derived_gin_idx",
+          "columns": [
+            {
+              "expression": "\"cities_derived\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "gin",
+          "with": {}
+        },
+        "internshipshq_jobs_regions_derived_gin_idx": {
+          "name": "internshipshq_jobs_regions_derived_gin_idx",
+          "columns": [
+            {
+              "expression": "\"regions_derived\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "gin",
+          "with": {}
+        },
+        "internshipshq_jobs_countries_derived_gin_idx": {
+          "name": "internshipshq_jobs_countries_derived_gin_idx",
+          "columns": [
+            {
+              "expression": "\"countries_derived\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "gin",
+          "with": {}
+        },
+        "internshipshq_jobs_ai_taxonomies_a_gin_idx": {
+          "name": "internshipshq_jobs_ai_taxonomies_a_gin_idx",
+          "columns": [
+            {
+              "expression": "\"ai_taxonomies_a\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "gin",
+          "with": {}
+        },
+        "internshipshq_jobs_employment_type_gin_idx": {
+          "name": "internshipshq_jobs_employment_type_gin_idx",
+          "columns": [
+            {
+              "expression": "\"employment_type\"",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "gin",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.internshipshq_session": {
+      "name": "internshipshq_session",
+      "schema": "",
+      "columns": {
+        "session_token": {
+          "name": "session_token",
+          "type": "varchar(255)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "expires": {
+          "name": "expires",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "internshipshq_session_user_id_idx": {
+          "name": "internshipshq_session_user_id_idx",
+          "columns": [
+            {
+              "expression": "user_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "internshipshq_session_user_id_internshipshq_user_id_fk": {
+          "name": "internshipshq_session_user_id_internshipshq_user_id_fk",
+          "tableFrom": "internshipshq_session",
+          "tableTo": "internshipshq_user",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.internshipshq_user": {
+      "name": "internshipshq_user",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar(255)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "email_verified": {
+          "name": "email_verified",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "image": {
+          "name": "image",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "password": {
+          "name": "password",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "internshipshq_user_email_unique": {
+          "name": "internshipshq_user_email_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "email"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.internshipshq_verification_token": {
+      "name": "internshipshq_verification_token",
+      "schema": "",
+      "columns": {
+        "identifier": {
+          "name": "identifier",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "token": {
+          "name": "token",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "expires": {
+          "name": "expires",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "internshipshq_verification_token_identifier_token_pk": {
+          "name": "internshipshq_verification_token_identifier_token_pk",
+          "columns": [
+            "identifier",
+            "token"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
